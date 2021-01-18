@@ -13,8 +13,8 @@ spring:
   mail: #邮箱
     host: smtp.exmail.qq.com
     port: 465
-    username: service@bkbedu.com
-    password: PbJBRuQGMgmzGCZW
+    username:
+    password:
     properties:
       smtp:
         auth: true
