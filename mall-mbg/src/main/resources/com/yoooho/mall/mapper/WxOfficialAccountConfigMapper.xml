@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yoooho.mall.mapper.WxOfficialAccountConfigMapper">
+  <resultMap id="BaseResultMap" type="com.yoooho.mall.model.WxOfficialAccountConfig">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="appid" jdbcType="VARCHAR" property="appid" />
+    <result column="appsecret" jdbcType="VARCHAR" property="appsecret" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="encodingaeskey" jdbcType="VARCHAR" property="encodingaeskey" />
+    <result column="api" jdbcType="VARCHAR" property="api" />
+    <result column="share_title" jdbcType="VARCHAR" property="shareTitle" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yoooho.mall.model.WxOfficialAccountConfig">
+    <result column="share_synopsis" jdbcType="LONGVARCHAR" property="shareSynopsis" />
+    <result column="share_img" jdbcType="LONGVARCHAR" property="shareImg" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, appid, appsecret, token, encodingaeskey, api, share_title
+  </sql>
+  <sql id="Blob_Column_List">
+    share_synopsis, share_img
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.yoooho.mall.model.WxOfficialAccountConfigExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from wx_official_account_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.yoooho.mall.model.WxOfficialAccountConfigExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wx_official_account_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from wx_official_account_config
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from wx_official_account_config
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yoooho.mall.model.WxOfficialAccountConfigExample">
+    delete from wx_official_account_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yoooho.mall.model.WxOfficialAccountConfig">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into wx_official_account_config (appid, appsecret, token, 
+      encodingaeskey, api, share_title, 
+      share_synopsis, share_img)
+    values (#{appid,jdbcType=VARCHAR}, #{appsecret,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, 
+      #{encodingaeskey,jdbcType=VARCHAR}, #{api,jdbcType=VARCHAR}, #{shareTitle,jdbcType=VARCHAR}, 
+      #{shareSynopsis,jdbcType=LONGVARCHAR}, #{shareImg,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yoooho.mall.model.WxOfficialAccountConfig">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into wx_official_account_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="appid != null">
+        appid,
+      </if>
+      <if test="appsecret != null">
+        appsecret,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="encodingaeskey != null">
+        encodingaeskey,
+      </if>
+      <if test="api != null">
+        api,
+      </if>
+      <if test="shareTitle != null">
+        share_title,
+      </if>
+      <if test="shareSynopsis != null">
+        share_synopsis,
+      </if>
+      <if test="shareImg != null">
+        share_img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="appid != null">
+        #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="appsecret != null">
+        #{appsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="encodingaeskey != null">
+        #{encodingaeskey,jdbcType=VARCHAR},
+      </if>
+      <if test="api != null">
+        #{api,jdbcType=VARCHAR},
+      </if>
+      <if test="shareTitle != null">
+        #{shareTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="shareSynopsis != null">
+        #{shareSynopsis,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="shareImg != null">
+        #{shareImg,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yoooho.mall.model.WxOfficialAccountConfigExample" resultType="java.lang.Long">
+    select count(*) from wx_official_account_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update wx_official_account_config
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.appid != null">
+        appid = #{record.appid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appsecret != null">
+        appsecret = #{record.appsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.token != null">
+        token = #{record.token,jdbcType=VARCHAR},
+      </if>
+      <if test="record.encodingaeskey != null">
+        encodingaeskey = #{record.encodingaeskey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.api != null">
+        api = #{record.api,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shareTitle != null">
+        share_title = #{record.shareTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shareSynopsis != null">
+        share_synopsis = #{record.shareSynopsis,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.shareImg != null">
+        share_img = #{record.shareImg,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update wx_official_account_config
+    set id = #{record.id,jdbcType=BIGINT},
+      appid = #{record.appid,jdbcType=VARCHAR},
+      appsecret = #{record.appsecret,jdbcType=VARCHAR},
+      token = #{record.token,jdbcType=VARCHAR},
+      encodingaeskey = #{record.encodingaeskey,jdbcType=VARCHAR},
+      api = #{record.api,jdbcType=VARCHAR},
+      share_title = #{record.shareTitle,jdbcType=VARCHAR},
+      share_synopsis = #{record.shareSynopsis,jdbcType=LONGVARCHAR},
+      share_img = #{record.shareImg,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update wx_official_account_config
+    set id = #{record.id,jdbcType=BIGINT},
+      appid = #{record.appid,jdbcType=VARCHAR},
+      appsecret = #{record.appsecret,jdbcType=VARCHAR},
+      token = #{record.token,jdbcType=VARCHAR},
+      encodingaeskey = #{record.encodingaeskey,jdbcType=VARCHAR},
+      api = #{record.api,jdbcType=VARCHAR},
+      share_title = #{record.shareTitle,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yoooho.mall.model.WxOfficialAccountConfig">
+    update wx_official_account_config
+    <set>
+      <if test="appid != null">
+        appid = #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="appsecret != null">
+        appsecret = #{appsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="encodingaeskey != null">
+        encodingaeskey = #{encodingaeskey,jdbcType=VARCHAR},
+      </if>
+      <if test="api != null">
+        api = #{api,jdbcType=VARCHAR},
+      </if>
+      <if test="shareTitle != null">
+        share_title = #{shareTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="shareSynopsis != null">
+        share_synopsis = #{shareSynopsis,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="shareImg != null">
+        share_img = #{shareImg,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yoooho.mall.model.WxOfficialAccountConfig">
+    update wx_official_account_config
+    set appid = #{appid,jdbcType=VARCHAR},
+      appsecret = #{appsecret,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      encodingaeskey = #{encodingaeskey,jdbcType=VARCHAR},
+      api = #{api,jdbcType=VARCHAR},
+      share_title = #{shareTitle,jdbcType=VARCHAR},
+      share_synopsis = #{shareSynopsis,jdbcType=LONGVARCHAR},
+      share_img = #{shareImg,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yoooho.mall.model.WxOfficialAccountConfig">
+    update wx_official_account_config
+    set appid = #{appid,jdbcType=VARCHAR},
+      appsecret = #{appsecret,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      encodingaeskey = #{encodingaeskey,jdbcType=VARCHAR},
+      api = #{api,jdbcType=VARCHAR},
+      share_title = #{shareTitle,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

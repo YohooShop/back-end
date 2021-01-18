@@ -1,0 +1,83 @@
+spring:
+  profiles:
+    active: prod #默认为开发环境
+  jackson:
+    serialization:
+      write-dates-as-timestamps: true
+  thymeleaf: ##编码格式
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML5
+  mail: #邮箱
+    host: smtp.exmail.qq.com
+    port: 465
+    username: service@bkbedu.com
+    password: PbJBRuQGMgmzGCZW
+    properties:
+      smtp:
+        auth: true
+        starttls: true
+      mail:
+        smtp:
+          ssl:
+            enable: true
+    default-encoding: UTF-8
+
+mybatis:
+  mapper-locations:
+    - classpath:dao/*.xml
+    - classpath*:com/**/mapper/*.xml
+
+http:
+  port: 8085 # http服务端口
+
+# 自定义redis key
+redis:
+  key:
+    prefix:
+      authCode: "portal:authCode:"
+      orderId: "portal:orderId:"
+    expire:
+      authCode: 150 # 验证码超期时间
+
+# 消息队列定义
+rabbitmq:
+  queue:
+    name:
+      cancelOrder: cancelOrderQueue
+
+jwt:
+  tokenHeader: Authorization #JWT存储的请求头
+  secret: mySecret #JWT加解密使用的密钥
+  expiration: 604800 #JWT的超期限时间(60*60*24)
+  refreshTokenExpired: "120"
+  tokenHead: Bearer  #JWT负载中拿到开头
+    # 在线用户key
+  online-key: online-token
+    # refresh header 的名字
+  refreshHeader: Refresh-Token
+
+wechat:
+  appid: wx37c3dc173d27fc87
+  secret: 07f0c566d8a83b49911cd48e15fa84f6
+  mp:
+    appId: wxabc33ea337b835e8
+    secret: 80ca2253469b3aed8a0ff6e4e1092311
+    token: woshiyigetokenaaa123qqq
+    aesKey: 4e0xO10MMtdLf35r8p4Zt1LLpRbHKZABSlvj2CFii1Y
+
+aliyun:
+  accessKeyId: LTAIYWAcGjOQY7dy
+  accessSecret: cpe2caOFvlpaA5ZUQRoUnp1XOh8Gua
+
+
+#邮箱验证码有效时间/分钟
+code:
+  expiration: 5
+
+logging:
+  level:
+    com.yoooho.mall.dao: debug
+

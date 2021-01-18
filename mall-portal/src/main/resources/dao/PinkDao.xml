@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yoooho.mall.dao.PinkDao">
+    <resultMap id="pinkResultMap" type="com.yoooho.mall.domain.OmsPinkBuyerDetail"
+               extends="com.yoooho.mall.mapper.OmsPinkMapper.BaseResultMap" autoMapping="true">
+        <association property="goods" columnPrefix="ppc_" resultMap="com.yoooho.mall.mapper.PmsProductCombinationMapper.BaseResultMap" autoMapping="true">
+        </association>
+        <collection property="pinkBuyers" columnPrefix="opb_" resultMap="com.yoooho.mall.mapper.OmsPinkBuyerMapper.BaseResultMap" autoMapping="true">
+        </collection>
+
+    </resultMap>
+
+    <select id="selectPink" resultMap="pinkResultMap">
+        SELECT op.id id,
+        op.cid cid,
+        op.pid pid,
+        op.people people,
+        op.price price,
+        op.add_time add_time,
+        op.stop_time stop_time,
+        op.k_id k_id,
+        op.status status,
+        opb.id opb_id,
+        opb.buyer_id opb_buyer_id,
+        opb.pink_id opb_pink_id,
+        opb.order_id opb_order_id,
+        opb.pink_num opb_pink_num,
+        opb.pink_amt opb_pink_amt,
+        opb.pink_status opb_pink_status,
+        opb.pink_time opb_pink_time,
+        opb.is_refund opb_is_refund,
+        opb.is_tpl opb_is_tpl,
+        opb.buyer_icon opb_buyer_icon,
+        opb.pay_status opb_pay_status,
+        opb.buyer_name opb_buyer_name,
+        ppc.product_id ppc_product_id,
+        ppc.pic ppc_pic,
+        ppc.name ppc_name,
+        ppc.people ppc_people,
+        ppc.description ppc_description,
+        ppc.price ppc_price,
+        ppc.original_price ppc_original_price,
+        ppc.sale ppc_sale
+        FROM
+        oms_pink op
+        LEFT JOIN oms_pink_buyer opb ON opb.pink_id =  op.id
+        LEFT JOIN  pms_product_combination ppc ON ppc.id =  op.cid
+        WHERE op.id = opb.pink_id
+        AND opb.buyer_id =#{userId}
+        <if test="status != null">
+            AND  status =#{status}
+        </if>
+        <if test="status == null">
+            AND  status != 0
+        </if>
+        AND opb.pay_status = 1
+        ORDER BY op.add_time DESC
+    </select>
+
+
+    <select id="getTimeOutPinks" resultMap="pinkResultMap">
+          SELECT op.id id,
+        op.cid cid,
+        op.pid pid,
+        op.people people,
+        op.price price,
+        op.add_time add_time,
+        op.stop_time stop_time,
+        op.k_id k_id,
+        op.status status,
+        opb.id opb_id,
+        opb.buyer_id opb_buyer_id,
+        opb.pink_id opb_pink_id,
+        opb.order_id opb_order_id,
+        opb.pink_num opb_pink_num,
+        opb.pink_amt opb_pink_amt,
+        opb.pink_status opb_pink_status,
+        opb.pink_time opb_pink_time,
+        opb.is_refund opb_is_refund,
+        opb.is_tpl opb_is_tpl,
+        opb.buyer_icon opb_buyer_icon,
+        opb.pay_status opb_pay_status,
+        opb.buyer_name opb_buyer_name
+        FROM
+        oms_pink op
+        LEFT JOIN oms_pink_buyer opb ON opb.pink_id =  op.id
+        WHERE  op.status = 1
+        AND op.k_id = opb.buyer_id
+        AND op.stop_time &lt;= unix_timestamp(now()) *1000
+    </select>
+</mapper>

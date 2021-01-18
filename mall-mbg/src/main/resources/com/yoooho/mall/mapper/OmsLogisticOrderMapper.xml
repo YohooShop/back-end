@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yoooho.mall.mapper.OmsLogisticOrderMapper">
+  <resultMap id="BaseResultMap" type="com.yoooho.mall.model.OmsLogisticOrder">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="shipper_code" jdbcType="VARCHAR" property="shipperCode" />
+    <result column="logistic_code" jdbcType="VARCHAR" property="logisticCode" />
+    <result column="sender_name" jdbcType="VARCHAR" property="senderName" />
+    <result column="sender_tel" jdbcType="VARCHAR" property="senderTel" />
+    <result column="receiver_tel" jdbcType="VARCHAR" property="receiverTel" />
+    <result column="kdn_order_code" jdbcType="VARCHAR" property="kdnOrderCode" />
+    <result column="thr_order_code" jdbcType="VARCHAR" property="thrOrderCode" />
+    <result column="receiver_name" jdbcType="VARCHAR" property="receiverName" />
+    <result column="commodity_name" jdbcType="VARCHAR" property="commodityName" />
+    <result column="pay_type" jdbcType="VARCHAR" property="payType" />
+    <result column="exp_type" jdbcType="VARCHAR" property="expType" />
+    <result column="sender_mobile" jdbcType="VARCHAR" property="senderMobile" />
+    <result column="receiver_mobile" jdbcType="VARCHAR" property="receiverMobile" />
+    <result column="sender_province" jdbcType="VARCHAR" property="senderProvince" />
+    <result column="receiver_province" jdbcType="VARCHAR" property="receiverProvince" />
+    <result column="package_name" jdbcType="VARCHAR" property="packageName" />
+    <result column="sender_city" jdbcType="VARCHAR" property="senderCity" />
+    <result column="receiver_city" jdbcType="VARCHAR" property="receiverCity" />
+    <result column="sender_expArea" jdbcType="VARCHAR" property="senderExparea" />
+    <result column="receiver_expArea" jdbcType="VARCHAR" property="receiverExparea" />
+    <result column="creatime" jdbcType="TIMESTAMP" property="creatime" />
+    <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yoooho.mall.model.OmsLogisticOrder">
+    <result column="print_template" jdbcType="LONGVARCHAR" property="printTemplate" />
+    <result column="receiver_address" jdbcType="LONGVARCHAR" property="receiverAddress" />
+    <result column="sender_address" jdbcType="LONGVARCHAR" property="senderAddress" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, order_id, shipper_code, logistic_code, sender_name, sender_tel, receiver_tel,
+    kdn_order_code, thr_order_code, receiver_name, commodity_name, pay_type, exp_type,
+    sender_mobile, receiver_mobile, sender_province, receiver_province, package_name,
+    sender_city, receiver_city, sender_expArea, receiver_expArea, creatime, order_sn
+  </sql>
+  <sql id="Blob_Column_List">
+    print_template, receiver_address, sender_address
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.yoooho.mall.model.OmsLogisticOrderExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from oms_logistic_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.yoooho.mall.model.OmsLogisticOrderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from oms_logistic_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from oms_logistic_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from oms_logistic_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yoooho.mall.model.OmsLogisticOrderExample">
+    delete from oms_logistic_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yoooho.mall.model.OmsLogisticOrder">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into oms_logistic_order (order_id, shipper_code, logistic_code,
+      sender_name, sender_tel, receiver_tel,
+      kdn_order_code, thr_order_code, receiver_name,
+      commodity_name, pay_type, exp_type,
+      sender_mobile, receiver_mobile, sender_province,
+      receiver_province, package_name, sender_city,
+      receiver_city, sender_expArea, receiver_expArea,
+      creatime, order_sn, print_template,
+      receiver_address, sender_address)
+    values (#{orderId,jdbcType=BIGINT}, #{shipperCode,jdbcType=VARCHAR}, #{logisticCode,jdbcType=VARCHAR},
+      #{senderName,jdbcType=VARCHAR}, #{senderTel,jdbcType=VARCHAR}, #{receiverTel,jdbcType=VARCHAR},
+      #{kdnOrderCode,jdbcType=VARCHAR}, #{thrOrderCode,jdbcType=VARCHAR}, #{receiverName,jdbcType=VARCHAR},
+      #{commodityName,jdbcType=VARCHAR}, #{payType,jdbcType=VARCHAR}, #{expType,jdbcType=VARCHAR},
+      #{senderMobile,jdbcType=VARCHAR}, #{receiverMobile,jdbcType=VARCHAR}, #{senderProvince,jdbcType=VARCHAR},
+      #{receiverProvince,jdbcType=VARCHAR}, #{packageName,jdbcType=VARCHAR}, #{senderCity,jdbcType=VARCHAR},
+      #{receiverCity,jdbcType=VARCHAR}, #{senderExparea,jdbcType=VARCHAR}, #{receiverExparea,jdbcType=VARCHAR},
+      #{creatime,jdbcType=TIMESTAMP}, #{orderSn,jdbcType=VARCHAR}, #{printTemplate,jdbcType=LONGVARCHAR},
+      #{receiverAddress,jdbcType=LONGVARCHAR}, #{senderAddress,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yoooho.mall.model.OmsLogisticOrder">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into oms_logistic_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="shipperCode != null">
+        shipper_code,
+      </if>
+      <if test="logisticCode != null">
+        logistic_code,
+      </if>
+      <if test="senderName != null">
+        sender_name,
+      </if>
+      <if test="senderTel != null">
+        sender_tel,
+      </if>
+      <if test="receiverTel != null">
+        receiver_tel,
+      </if>
+      <if test="kdnOrderCode != null">
+        kdn_order_code,
+      </if>
+      <if test="thrOrderCode != null">
+        thr_order_code,
+      </if>
+      <if test="receiverName != null">
+        receiver_name,
+      </if>
+      <if test="commodityName != null">
+        commodity_name,
+      </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
+      <if test="expType != null">
+        exp_type,
+      </if>
+      <if test="senderMobile != null">
+        sender_mobile,
+      </if>
+      <if test="receiverMobile != null">
+        receiver_mobile,
+      </if>
+      <if test="senderProvince != null">
+        sender_province,
+      </if>
+      <if test="receiverProvince != null">
+        receiver_province,
+      </if>
+      <if test="packageName != null">
+        package_name,
+      </if>
+      <if test="senderCity != null">
+        sender_city,
+      </if>
+      <if test="receiverCity != null">
+        receiver_city,
+      </if>
+      <if test="senderExparea != null">
+        sender_expArea,
+      </if>
+      <if test="receiverExparea != null">
+        receiver_expArea,
+      </if>
+      <if test="creatime != null">
+        creatime,
+      </if>
+      <if test="orderSn != null">
+        order_sn,
+      </if>
+      <if test="printTemplate != null">
+        print_template,
+      </if>
+      <if test="receiverAddress != null">
+        receiver_address,
+      </if>
+      <if test="senderAddress != null">
+        sender_address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="shipperCode != null">
+        #{shipperCode,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticCode != null">
+        #{logisticCode,jdbcType=VARCHAR},
+      </if>
+      <if test="senderName != null">
+        #{senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="senderTel != null">
+        #{senderTel,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverTel != null">
+        #{receiverTel,jdbcType=VARCHAR},
+      </if>
+      <if test="kdnOrderCode != null">
+        #{kdnOrderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="thrOrderCode != null">
+        #{thrOrderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverName != null">
+        #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null">
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="expType != null">
+        #{expType,jdbcType=VARCHAR},
+      </if>
+      <if test="senderMobile != null">
+        #{senderMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverMobile != null">
+        #{receiverMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="senderProvince != null">
+        #{senderProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverProvince != null">
+        #{receiverProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="packageName != null">
+        #{packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="senderCity != null">
+        #{senderCity,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverCity != null">
+        #{receiverCity,jdbcType=VARCHAR},
+      </if>
+      <if test="senderExparea != null">
+        #{senderExparea,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverExparea != null">
+        #{receiverExparea,jdbcType=VARCHAR},
+      </if>
+      <if test="creatime != null">
+        #{creatime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderSn != null">
+        #{orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="printTemplate != null">
+        #{printTemplate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="receiverAddress != null">
+        #{receiverAddress,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="senderAddress != null">
+        #{senderAddress,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yoooho.mall.model.OmsLogisticOrderExample" resultType="java.lang.Long">
+    select count(*) from oms_logistic_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update oms_logistic_order
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderId != null">
+        order_id = #{record.orderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.shipperCode != null">
+        shipper_code = #{record.shipperCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logisticCode != null">
+        logistic_code = #{record.logisticCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.senderName != null">
+        sender_name = #{record.senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.senderTel != null">
+        sender_tel = #{record.senderTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiverTel != null">
+        receiver_tel = #{record.receiverTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kdnOrderCode != null">
+        kdn_order_code = #{record.kdnOrderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thrOrderCode != null">
+        thr_order_code = #{record.thrOrderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiverName != null">
+        receiver_name = #{record.receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityName != null">
+        commodity_name = #{record.commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payType != null">
+        pay_type = #{record.payType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expType != null">
+        exp_type = #{record.expType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.senderMobile != null">
+        sender_mobile = #{record.senderMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiverMobile != null">
+        receiver_mobile = #{record.receiverMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.senderProvince != null">
+        sender_province = #{record.senderProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiverProvince != null">
+        receiver_province = #{record.receiverProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageName != null">
+        package_name = #{record.packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.senderCity != null">
+        sender_city = #{record.senderCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiverCity != null">
+        receiver_city = #{record.receiverCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.senderExparea != null">
+        sender_expArea = #{record.senderExparea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiverExparea != null">
+        receiver_expArea = #{record.receiverExparea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatime != null">
+        creatime = #{record.creatime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderSn != null">
+        order_sn = #{record.orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.printTemplate != null">
+        print_template = #{record.printTemplate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.receiverAddress != null">
+        receiver_address = #{record.receiverAddress,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.senderAddress != null">
+        sender_address = #{record.senderAddress,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update oms_logistic_order
+    set id = #{record.id,jdbcType=INTEGER},
+      order_id = #{record.orderId,jdbcType=BIGINT},
+      shipper_code = #{record.shipperCode,jdbcType=VARCHAR},
+      logistic_code = #{record.logisticCode,jdbcType=VARCHAR},
+      sender_name = #{record.senderName,jdbcType=VARCHAR},
+      sender_tel = #{record.senderTel,jdbcType=VARCHAR},
+      receiver_tel = #{record.receiverTel,jdbcType=VARCHAR},
+      kdn_order_code = #{record.kdnOrderCode,jdbcType=VARCHAR},
+      thr_order_code = #{record.thrOrderCode,jdbcType=VARCHAR},
+      receiver_name = #{record.receiverName,jdbcType=VARCHAR},
+      commodity_name = #{record.commodityName,jdbcType=VARCHAR},
+      pay_type = #{record.payType,jdbcType=VARCHAR},
+      exp_type = #{record.expType,jdbcType=VARCHAR},
+      sender_mobile = #{record.senderMobile,jdbcType=VARCHAR},
+      receiver_mobile = #{record.receiverMobile,jdbcType=VARCHAR},
+      sender_province = #{record.senderProvince,jdbcType=VARCHAR},
+      receiver_province = #{record.receiverProvince,jdbcType=VARCHAR},
+      package_name = #{record.packageName,jdbcType=VARCHAR},
+      sender_city = #{record.senderCity,jdbcType=VARCHAR},
+      receiver_city = #{record.receiverCity,jdbcType=VARCHAR},
+      sender_expArea = #{record.senderExparea,jdbcType=VARCHAR},
+      receiver_expArea = #{record.receiverExparea,jdbcType=VARCHAR},
+      creatime = #{record.creatime,jdbcType=TIMESTAMP},
+      order_sn = #{record.orderSn,jdbcType=VARCHAR},
+      print_template = #{record.printTemplate,jdbcType=LONGVARCHAR},
+      receiver_address = #{record.receiverAddress,jdbcType=LONGVARCHAR},
+      sender_address = #{record.senderAddress,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update oms_logistic_order
+    set id = #{record.id,jdbcType=INTEGER},
+      order_id = #{record.orderId,jdbcType=BIGINT},
+      shipper_code = #{record.shipperCode,jdbcType=VARCHAR},
+      logistic_code = #{record.logisticCode,jdbcType=VARCHAR},
+      sender_name = #{record.senderName,jdbcType=VARCHAR},
+      sender_tel = #{record.senderTel,jdbcType=VARCHAR},
+      receiver_tel = #{record.receiverTel,jdbcType=VARCHAR},
+      kdn_order_code = #{record.kdnOrderCode,jdbcType=VARCHAR},
+      thr_order_code = #{record.thrOrderCode,jdbcType=VARCHAR},
+      receiver_name = #{record.receiverName,jdbcType=VARCHAR},
+      commodity_name = #{record.commodityName,jdbcType=VARCHAR},
+      pay_type = #{record.payType,jdbcType=VARCHAR},
+      exp_type = #{record.expType,jdbcType=VARCHAR},
+      sender_mobile = #{record.senderMobile,jdbcType=VARCHAR},
+      receiver_mobile = #{record.receiverMobile,jdbcType=VARCHAR},
+      sender_province = #{record.senderProvince,jdbcType=VARCHAR},
+      receiver_province = #{record.receiverProvince,jdbcType=VARCHAR},
+      package_name = #{record.packageName,jdbcType=VARCHAR},
+      sender_city = #{record.senderCity,jdbcType=VARCHAR},
+      receiver_city = #{record.receiverCity,jdbcType=VARCHAR},
+      sender_expArea = #{record.senderExparea,jdbcType=VARCHAR},
+      receiver_expArea = #{record.receiverExparea,jdbcType=VARCHAR},
+      creatime = #{record.creatime,jdbcType=TIMESTAMP},
+      order_sn = #{record.orderSn,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yoooho.mall.model.OmsLogisticOrder">
+    update oms_logistic_order
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="shipperCode != null">
+        shipper_code = #{shipperCode,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticCode != null">
+        logistic_code = #{logisticCode,jdbcType=VARCHAR},
+      </if>
+      <if test="senderName != null">
+        sender_name = #{senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="senderTel != null">
+        sender_tel = #{senderTel,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverTel != null">
+        receiver_tel = #{receiverTel,jdbcType=VARCHAR},
+      </if>
+      <if test="kdnOrderCode != null">
+        kdn_order_code = #{kdnOrderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="thrOrderCode != null">
+        thr_order_code = #{thrOrderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverName != null">
+        receiver_name = #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null">
+        commodity_name = #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null">
+        pay_type = #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="expType != null">
+        exp_type = #{expType,jdbcType=VARCHAR},
+      </if>
+      <if test="senderMobile != null">
+        sender_mobile = #{senderMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverMobile != null">
+        receiver_mobile = #{receiverMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="senderProvince != null">
+        sender_province = #{senderProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverProvince != null">
+        receiver_province = #{receiverProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="packageName != null">
+        package_name = #{packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="senderCity != null">
+        sender_city = #{senderCity,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverCity != null">
+        receiver_city = #{receiverCity,jdbcType=VARCHAR},
+      </if>
+      <if test="senderExparea != null">
+        sender_expArea = #{senderExparea,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverExparea != null">
+        receiver_expArea = #{receiverExparea,jdbcType=VARCHAR},
+      </if>
+      <if test="creatime != null">
+        creatime = #{creatime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderSn != null">
+        order_sn = #{orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="printTemplate != null">
+        print_template = #{printTemplate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="receiverAddress != null">
+        receiver_address = #{receiverAddress,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="senderAddress != null">
+        sender_address = #{senderAddress,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yoooho.mall.model.OmsLogisticOrder">
+    update oms_logistic_order
+    set order_id = #{orderId,jdbcType=BIGINT},
+      shipper_code = #{shipperCode,jdbcType=VARCHAR},
+      logistic_code = #{logisticCode,jdbcType=VARCHAR},
+      sender_name = #{senderName,jdbcType=VARCHAR},
+      sender_tel = #{senderTel,jdbcType=VARCHAR},
+      receiver_tel = #{receiverTel,jdbcType=VARCHAR},
+      kdn_order_code = #{kdnOrderCode,jdbcType=VARCHAR},
+      thr_order_code = #{thrOrderCode,jdbcType=VARCHAR},
+      receiver_name = #{receiverName,jdbcType=VARCHAR},
+      commodity_name = #{commodityName,jdbcType=VARCHAR},
+      pay_type = #{payType,jdbcType=VARCHAR},
+      exp_type = #{expType,jdbcType=VARCHAR},
+      sender_mobile = #{senderMobile,jdbcType=VARCHAR},
+      receiver_mobile = #{receiverMobile,jdbcType=VARCHAR},
+      sender_province = #{senderProvince,jdbcType=VARCHAR},
+      receiver_province = #{receiverProvince,jdbcType=VARCHAR},
+      package_name = #{packageName,jdbcType=VARCHAR},
+      sender_city = #{senderCity,jdbcType=VARCHAR},
+      receiver_city = #{receiverCity,jdbcType=VARCHAR},
+      sender_expArea = #{senderExparea,jdbcType=VARCHAR},
+      receiver_expArea = #{receiverExparea,jdbcType=VARCHAR},
+      creatime = #{creatime,jdbcType=TIMESTAMP},
+      order_sn = #{orderSn,jdbcType=VARCHAR},
+      print_template = #{printTemplate,jdbcType=LONGVARCHAR},
+      receiver_address = #{receiverAddress,jdbcType=LONGVARCHAR},
+      sender_address = #{senderAddress,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yoooho.mall.model.OmsLogisticOrder">
+    update oms_logistic_order
+    set order_id = #{orderId,jdbcType=BIGINT},
+      shipper_code = #{shipperCode,jdbcType=VARCHAR},
+      logistic_code = #{logisticCode,jdbcType=VARCHAR},
+      sender_name = #{senderName,jdbcType=VARCHAR},
+      sender_tel = #{senderTel,jdbcType=VARCHAR},
+      receiver_tel = #{receiverTel,jdbcType=VARCHAR},
+      kdn_order_code = #{kdnOrderCode,jdbcType=VARCHAR},
+      thr_order_code = #{thrOrderCode,jdbcType=VARCHAR},
+      receiver_name = #{receiverName,jdbcType=VARCHAR},
+      commodity_name = #{commodityName,jdbcType=VARCHAR},
+      pay_type = #{payType,jdbcType=VARCHAR},
+      exp_type = #{expType,jdbcType=VARCHAR},
+      sender_mobile = #{senderMobile,jdbcType=VARCHAR},
+      receiver_mobile = #{receiverMobile,jdbcType=VARCHAR},
+      sender_province = #{senderProvince,jdbcType=VARCHAR},
+      receiver_province = #{receiverProvince,jdbcType=VARCHAR},
+      package_name = #{packageName,jdbcType=VARCHAR},
+      sender_city = #{senderCity,jdbcType=VARCHAR},
+      receiver_city = #{receiverCity,jdbcType=VARCHAR},
+      sender_expArea = #{senderExparea,jdbcType=VARCHAR},
+      receiver_expArea = #{receiverExparea,jdbcType=VARCHAR},
+      creatime = #{creatime,jdbcType=TIMESTAMP},
+      order_sn = #{orderSn,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

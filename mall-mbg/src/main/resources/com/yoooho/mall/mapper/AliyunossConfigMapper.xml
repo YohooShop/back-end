@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yoooho.mall.mapper.AliyunossConfigMapper">
+  <resultMap id="BaseResultMap" type="com.yoooho.mall.model.AliyunossConfig">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="endpoint" jdbcType="VARCHAR" property="endpoint" />
+    <result column="access_key_id" jdbcType="VARCHAR" property="accessKeyId" />
+    <result column="access_key_secre" jdbcType="VARCHAR" property="accessKeySecre" />
+    <result column="bucket_name" jdbcType="VARCHAR" property="bucketName" />
+    <result column="expire" jdbcType="VARCHAR" property="expire" />
+    <result column="max_size" jdbcType="VARCHAR" property="maxSize" />
+    <result column="callback" jdbcType="VARCHAR" property="callback" />
+    <result column="prefix" jdbcType="VARCHAR" property="prefix" />
+    <result column="host" jdbcType="VARCHAR" property="host" />
+    <result column="zone" jdbcType="VARCHAR" property="zone" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, endpoint, access_key_id, access_key_secre, bucket_name, expire, max_size, callback, 
+    `prefix`, `host`, `zone`, `type`
+  </sql>
+  <select id="selectByExample" parameterType="com.yoooho.mall.model.AliyunossConfigExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from aliyunoss_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from aliyunoss_config
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from aliyunoss_config
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yoooho.mall.model.AliyunossConfigExample">
+    delete from aliyunoss_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yoooho.mall.model.AliyunossConfig">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into aliyunoss_config (endpoint, access_key_id, access_key_secre, 
+      bucket_name, expire, max_size, 
+      callback, `prefix`, `host`, 
+      `zone`, `type`)
+    values (#{endpoint,jdbcType=VARCHAR}, #{accessKeyId,jdbcType=VARCHAR}, #{accessKeySecre,jdbcType=VARCHAR}, 
+      #{bucketName,jdbcType=VARCHAR}, #{expire,jdbcType=VARCHAR}, #{maxSize,jdbcType=VARCHAR}, 
+      #{callback,jdbcType=VARCHAR}, #{prefix,jdbcType=VARCHAR}, #{host,jdbcType=VARCHAR}, 
+      #{zone,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yoooho.mall.model.AliyunossConfig">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into aliyunoss_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="endpoint != null">
+        endpoint,
+      </if>
+      <if test="accessKeyId != null">
+        access_key_id,
+      </if>
+      <if test="accessKeySecre != null">
+        access_key_secre,
+      </if>
+      <if test="bucketName != null">
+        bucket_name,
+      </if>
+      <if test="expire != null">
+        expire,
+      </if>
+      <if test="maxSize != null">
+        max_size,
+      </if>
+      <if test="callback != null">
+        callback,
+      </if>
+      <if test="prefix != null">
+        `prefix`,
+      </if>
+      <if test="host != null">
+        `host`,
+      </if>
+      <if test="zone != null">
+        `zone`,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="endpoint != null">
+        #{endpoint,jdbcType=VARCHAR},
+      </if>
+      <if test="accessKeyId != null">
+        #{accessKeyId,jdbcType=VARCHAR},
+      </if>
+      <if test="accessKeySecre != null">
+        #{accessKeySecre,jdbcType=VARCHAR},
+      </if>
+      <if test="bucketName != null">
+        #{bucketName,jdbcType=VARCHAR},
+      </if>
+      <if test="expire != null">
+        #{expire,jdbcType=VARCHAR},
+      </if>
+      <if test="maxSize != null">
+        #{maxSize,jdbcType=VARCHAR},
+      </if>
+      <if test="callback != null">
+        #{callback,jdbcType=VARCHAR},
+      </if>
+      <if test="prefix != null">
+        #{prefix,jdbcType=VARCHAR},
+      </if>
+      <if test="host != null">
+        #{host,jdbcType=VARCHAR},
+      </if>
+      <if test="zone != null">
+        #{zone,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yoooho.mall.model.AliyunossConfigExample" resultType="java.lang.Long">
+    select count(*) from aliyunoss_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update aliyunoss_config
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.endpoint != null">
+        endpoint = #{record.endpoint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accessKeyId != null">
+        access_key_id = #{record.accessKeyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accessKeySecre != null">
+        access_key_secre = #{record.accessKeySecre,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bucketName != null">
+        bucket_name = #{record.bucketName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expire != null">
+        expire = #{record.expire,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maxSize != null">
+        max_size = #{record.maxSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.callback != null">
+        callback = #{record.callback,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prefix != null">
+        `prefix` = #{record.prefix,jdbcType=VARCHAR},
+      </if>
+      <if test="record.host != null">
+        `host` = #{record.host,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zone != null">
+        `zone` = #{record.zone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        `type` = #{record.type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update aliyunoss_config
+    set id = #{record.id,jdbcType=INTEGER},
+      endpoint = #{record.endpoint,jdbcType=VARCHAR},
+      access_key_id = #{record.accessKeyId,jdbcType=VARCHAR},
+      access_key_secre = #{record.accessKeySecre,jdbcType=VARCHAR},
+      bucket_name = #{record.bucketName,jdbcType=VARCHAR},
+      expire = #{record.expire,jdbcType=VARCHAR},
+      max_size = #{record.maxSize,jdbcType=VARCHAR},
+      callback = #{record.callback,jdbcType=VARCHAR},
+      `prefix` = #{record.prefix,jdbcType=VARCHAR},
+      `host` = #{record.host,jdbcType=VARCHAR},
+      `zone` = #{record.zone,jdbcType=VARCHAR},
+      `type` = #{record.type,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yoooho.mall.model.AliyunossConfig">
+    update aliyunoss_config
+    <set>
+      <if test="endpoint != null">
+        endpoint = #{endpoint,jdbcType=VARCHAR},
+      </if>
+      <if test="accessKeyId != null">
+        access_key_id = #{accessKeyId,jdbcType=VARCHAR},
+      </if>
+      <if test="accessKeySecre != null">
+        access_key_secre = #{accessKeySecre,jdbcType=VARCHAR},
+      </if>
+      <if test="bucketName != null">
+        bucket_name = #{bucketName,jdbcType=VARCHAR},
+      </if>
+      <if test="expire != null">
+        expire = #{expire,jdbcType=VARCHAR},
+      </if>
+      <if test="maxSize != null">
+        max_size = #{maxSize,jdbcType=VARCHAR},
+      </if>
+      <if test="callback != null">
+        callback = #{callback,jdbcType=VARCHAR},
+      </if>
+      <if test="prefix != null">
+        `prefix` = #{prefix,jdbcType=VARCHAR},
+      </if>
+      <if test="host != null">
+        `host` = #{host,jdbcType=VARCHAR},
+      </if>
+      <if test="zone != null">
+        `zone` = #{zone,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yoooho.mall.model.AliyunossConfig">
+    update aliyunoss_config
+    set endpoint = #{endpoint,jdbcType=VARCHAR},
+      access_key_id = #{accessKeyId,jdbcType=VARCHAR},
+      access_key_secre = #{accessKeySecre,jdbcType=VARCHAR},
+      bucket_name = #{bucketName,jdbcType=VARCHAR},
+      expire = #{expire,jdbcType=VARCHAR},
+      max_size = #{maxSize,jdbcType=VARCHAR},
+      callback = #{callback,jdbcType=VARCHAR},
+      `prefix` = #{prefix,jdbcType=VARCHAR},
+      `host` = #{host,jdbcType=VARCHAR},
+      `zone` = #{zone,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

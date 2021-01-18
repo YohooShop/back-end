@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/mall.iml" filepath="$PROJECT_DIR$/mall.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-admin/mall-admin.iml" filepath="$PROJECT_DIR$/mall-admin/mall-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-common/mall-common.iml" filepath="$PROJECT_DIR$/mall-common/mall-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-coupon/mall-coupon.iml" filepath="$PROJECT_DIR$/mall-coupon/mall-coupon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-demo/mall-demo.iml" filepath="$PROJECT_DIR$/mall-demo/mall-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-express/mall-express.iml" filepath="$PROJECT_DIR$/mall-express/mall-express.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-goods/mall-goods.iml" filepath="$PROJECT_DIR$/mall-goods/mall-goods.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-mbg/mall-mbg.iml" filepath="$PROJECT_DIR$/mall-mbg/mall-mbg.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-mp/mall-mp.iml" filepath="$PROJECT_DIR$/mall-mp/mall-mp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-mq/mall-mq.iml" filepath="$PROJECT_DIR$/mall-mq/mall-mq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-order/mall-order.iml" filepath="$PROJECT_DIR$/mall-order/mall-order.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-portal/mall-portal.iml" filepath="$PROJECT_DIR$/mall-portal/mall-portal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-product/mall-product.iml" filepath="$PROJECT_DIR$/mall-product/mall-product.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-search/mall-search.iml" filepath="$PROJECT_DIR$/mall-search/mall-search.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-system/mall-system.iml" filepath="$PROJECT_DIR$/mall-system/mall-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-tools/mall-tools.iml" filepath="$PROJECT_DIR$/mall-tools/mall-tools.iml" />
+    </modules>
+  </component>
+</project>

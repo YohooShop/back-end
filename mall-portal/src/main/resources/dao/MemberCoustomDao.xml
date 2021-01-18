@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yoooho.mall.dao.MemberCoustomDao">
+    <select id="select" resultType="com.yoooho.mall.domain.UmsMemberWX" parameterType="java.lang.String">
+            select * from ums_member_wxoffice where open_id = #{open_id}
+    </select>
+    <insert id="insert" parameterType="com.yoooho.mall.domain.UmsMemberWX">
+        insert into ums_member_wxoffice (user_id, open_id, union_id, create_time) values (#{user_id},#{open_id},#{union_id}, #{create_time})
+    </insert>
+
+</mapper>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yoooho.mall.dao.CouponDao">
+   <select id="getCoupons" resultType="com.yoooho.mall.model.SmsCoupon" parameterType="java.lang.Long">
+        Select *
+        From sms_coupon
+        Where not Exists (Select * From sms_coupon_history
+        Where sms_coupon.id!= sms_coupon_history.coupon_id and sms_coupon_history.member_id = #{member_id} )
+        and end_time >  (SELECT CURDATE())
+   </select>
+</mapper>

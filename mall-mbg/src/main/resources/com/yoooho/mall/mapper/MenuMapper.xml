@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yoooho.mall.mapper.MenuMapper">
+  <resultMap id="BaseResultMap" type="com.yoooho.mall.model.Menu">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <id column="i_frame" jdbcType="BIT" property="iFrame" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="component" jdbcType="VARCHAR" property="component" />
+    <result column="pid" jdbcType="BIGINT" property="pid" />
+    <result column="sort" jdbcType="BIGINT" property="sort" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="cache" jdbcType="BIT" property="cache" />
+    <result column="hidden" jdbcType="BIT" property="hidden" />
+    <result column="component_name" jdbcType="VARCHAR" property="componentName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="permission" jdbcType="VARCHAR" property="permission" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, i_frame, `name`, component, pid, sort, icon, `path`, `cache`, hidden, component_name, 
+    create_time, permission, `type`
+  </sql>
+  <select id="selectByExample" parameterType="com.yoooho.mall.model.MenuExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from menu
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from menu
+    where id = #{id,jdbcType=BIGINT}
+      and i_frame = #{iFrame,jdbcType=BIT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from menu
+    where id = #{id,jdbcType=BIGINT}
+      and i_frame = #{iFrame,jdbcType=BIT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yoooho.mall.model.MenuExample">
+    delete from menu
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yoooho.mall.model.Menu">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into menu (i_frame, `name`, component, 
+      pid, sort, icon, `path`, 
+      `cache`, hidden, component_name, 
+      create_time, permission, `type`
+      )
+    values (#{iFrame,jdbcType=BIT}, #{name,jdbcType=VARCHAR}, #{component,jdbcType=VARCHAR}, 
+      #{pid,jdbcType=BIGINT}, #{sort,jdbcType=BIGINT}, #{icon,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+      #{cache,jdbcType=BIT}, #{hidden,jdbcType=BIT}, #{componentName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{permission,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yoooho.mall.model.Menu">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="iFrame != null">
+        i_frame,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="component != null">
+        component,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="path != null">
+        `path`,
+      </if>
+      <if test="cache != null">
+        `cache`,
+      </if>
+      <if test="hidden != null">
+        hidden,
+      </if>
+      <if test="componentName != null">
+        component_name,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="permission != null">
+        permission,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="iFrame != null">
+        #{iFrame,jdbcType=BIT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="component != null">
+        #{component,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=BIGINT},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="cache != null">
+        #{cache,jdbcType=BIT},
+      </if>
+      <if test="hidden != null">
+        #{hidden,jdbcType=BIT},
+      </if>
+      <if test="componentName != null">
+        #{componentName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="permission != null">
+        #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yoooho.mall.model.MenuExample" resultType="java.lang.Long">
+    select count(*) from menu
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update menu
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.iFrame != null">
+        i_frame = #{record.iFrame,jdbcType=BIT},
+      </if>
+      <if test="record.name != null">
+        `name` = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.component != null">
+        component = #{record.component,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pid != null">
+        pid = #{record.pid,jdbcType=BIGINT},
+      </if>
+      <if test="record.sort != null">
+        sort = #{record.sort,jdbcType=BIGINT},
+      </if>
+      <if test="record.icon != null">
+        icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.path != null">
+        `path` = #{record.path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cache != null">
+        `cache` = #{record.cache,jdbcType=BIT},
+      </if>
+      <if test="record.hidden != null">
+        hidden = #{record.hidden,jdbcType=BIT},
+      </if>
+      <if test="record.componentName != null">
+        component_name = #{record.componentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.permission != null">
+        permission = #{record.permission,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        `type` = #{record.type,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update menu
+    set id = #{record.id,jdbcType=BIGINT},
+      i_frame = #{record.iFrame,jdbcType=BIT},
+      `name` = #{record.name,jdbcType=VARCHAR},
+      component = #{record.component,jdbcType=VARCHAR},
+      pid = #{record.pid,jdbcType=BIGINT},
+      sort = #{record.sort,jdbcType=BIGINT},
+      icon = #{record.icon,jdbcType=VARCHAR},
+      `path` = #{record.path,jdbcType=VARCHAR},
+      `cache` = #{record.cache,jdbcType=BIT},
+      hidden = #{record.hidden,jdbcType=BIT},
+      component_name = #{record.componentName,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      permission = #{record.permission,jdbcType=VARCHAR},
+      `type` = #{record.type,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yoooho.mall.model.Menu">
+    update menu
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="component != null">
+        component = #{component,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=BIGINT},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        `path` = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="cache != null">
+        `cache` = #{cache,jdbcType=BIT},
+      </if>
+      <if test="hidden != null">
+        hidden = #{hidden,jdbcType=BIT},
+      </if>
+      <if test="componentName != null">
+        component_name = #{componentName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="permission != null">
+        permission = #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+      and i_frame = #{iFrame,jdbcType=BIT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yoooho.mall.model.Menu">
+    update menu
+    set `name` = #{name,jdbcType=VARCHAR},
+      component = #{component,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=BIGINT},
+      sort = #{sort,jdbcType=BIGINT},
+      icon = #{icon,jdbcType=VARCHAR},
+      `path` = #{path,jdbcType=VARCHAR},
+      `cache` = #{cache,jdbcType=BIT},
+      hidden = #{hidden,jdbcType=BIT},
+      component_name = #{componentName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      permission = #{permission,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+      and i_frame = #{iFrame,jdbcType=BIT}
+  </update>
+</mapper>

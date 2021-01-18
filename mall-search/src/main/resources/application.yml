@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: prod #默认为开发环境
+
+server:
+  port: 8081
+
+mybatis:
+  mapper-locations:
+    - classpath:dao/*.xml
+    - classpath*:com/**/convern/*.xml
+
+logging:
+  level:
+    root: info
+    com.yoooho.mall: debug
+
+
+

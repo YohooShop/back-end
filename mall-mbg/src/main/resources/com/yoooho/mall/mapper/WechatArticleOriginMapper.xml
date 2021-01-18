@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yoooho.mall.mapper.WechatArticleOriginMapper">
+  <resultMap id="BaseResultMap" type="com.yoooho.mall.model.WechatArticleOrigin">
+    <id column="mid" jdbcType="VARCHAR" property="mid" />
+    <result column="thumb_media_id" jdbcType="VARCHAR" property="thumbMediaId" />
+    <result column="thumb_url" jdbcType="VARCHAR" property="thumbUrl" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="content_source_url" jdbcType="VARCHAR" property="contentSourceUrl" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="digest" jdbcType="VARCHAR" property="digest" />
+    <result column="showc_cover_pic" jdbcType="BIT" property="showcCoverPic" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="need_open_comment" jdbcType="BIT" property="needOpenComment" />
+    <result column="only_fans_can_comment" jdbcType="BIT" property="onlyFansCanComment" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    mid, thumb_media_id, thumb_url, author, title, content_source_url, content, digest, 
+    showc_cover_pic, url, need_open_comment, only_fans_can_comment, create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.yoooho.mall.model.WechatArticleOriginExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wechat_article_origin
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wechat_article_origin
+    where mid = #{mid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from wechat_article_origin
+    where mid = #{mid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yoooho.mall.model.WechatArticleOriginExample">
+    delete from wechat_article_origin
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yoooho.mall.model.WechatArticleOrigin">
+    insert into wechat_article_origin (mid, thumb_media_id, thumb_url, 
+      author, title, content_source_url, 
+      content, digest, showc_cover_pic, 
+      url, need_open_comment, only_fans_can_comment, 
+      create_time, update_time)
+    values (#{mid,jdbcType=VARCHAR}, #{thumbMediaId,jdbcType=VARCHAR}, #{thumbUrl,jdbcType=VARCHAR}, 
+      #{author,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{contentSourceUrl,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{digest,jdbcType=VARCHAR}, #{showcCoverPic,jdbcType=BIT}, 
+      #{url,jdbcType=VARCHAR}, #{needOpenComment,jdbcType=BIT}, #{onlyFansCanComment,jdbcType=BIT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yoooho.mall.model.WechatArticleOrigin">
+    insert into wechat_article_origin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mid != null">
+        mid,
+      </if>
+      <if test="thumbMediaId != null">
+        thumb_media_id,
+      </if>
+      <if test="thumbUrl != null">
+        thumb_url,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="contentSourceUrl != null">
+        content_source_url,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="digest != null">
+        digest,
+      </if>
+      <if test="showcCoverPic != null">
+        showc_cover_pic,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="needOpenComment != null">
+        need_open_comment,
+      </if>
+      <if test="onlyFansCanComment != null">
+        only_fans_can_comment,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mid != null">
+        #{mid,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbMediaId != null">
+        #{thumbMediaId,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbUrl != null">
+        #{thumbUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="contentSourceUrl != null">
+        #{contentSourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="digest != null">
+        #{digest,jdbcType=VARCHAR},
+      </if>
+      <if test="showcCoverPic != null">
+        #{showcCoverPic,jdbcType=BIT},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="needOpenComment != null">
+        #{needOpenComment,jdbcType=BIT},
+      </if>
+      <if test="onlyFansCanComment != null">
+        #{onlyFansCanComment,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yoooho.mall.model.WechatArticleOriginExample" resultType="java.lang.Long">
+    select count(*) from wechat_article_origin
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update wechat_article_origin
+    <set>
+      <if test="record.mid != null">
+        mid = #{record.mid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thumbMediaId != null">
+        thumb_media_id = #{record.thumbMediaId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thumbUrl != null">
+        thumb_url = #{record.thumbUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.author != null">
+        author = #{record.author,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contentSourceUrl != null">
+        content_source_url = #{record.contentSourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.digest != null">
+        digest = #{record.digest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.showcCoverPic != null">
+        showc_cover_pic = #{record.showcCoverPic,jdbcType=BIT},
+      </if>
+      <if test="record.url != null">
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.needOpenComment != null">
+        need_open_comment = #{record.needOpenComment,jdbcType=BIT},
+      </if>
+      <if test="record.onlyFansCanComment != null">
+        only_fans_can_comment = #{record.onlyFansCanComment,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update wechat_article_origin
+    set mid = #{record.mid,jdbcType=VARCHAR},
+      thumb_media_id = #{record.thumbMediaId,jdbcType=VARCHAR},
+      thumb_url = #{record.thumbUrl,jdbcType=VARCHAR},
+      author = #{record.author,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      content_source_url = #{record.contentSourceUrl,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      digest = #{record.digest,jdbcType=VARCHAR},
+      showc_cover_pic = #{record.showcCoverPic,jdbcType=BIT},
+      url = #{record.url,jdbcType=VARCHAR},
+      need_open_comment = #{record.needOpenComment,jdbcType=BIT},
+      only_fans_can_comment = #{record.onlyFansCanComment,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yoooho.mall.model.WechatArticleOrigin">
+    update wechat_article_origin
+    <set>
+      <if test="thumbMediaId != null">
+        thumb_media_id = #{thumbMediaId,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbUrl != null">
+        thumb_url = #{thumbUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="contentSourceUrl != null">
+        content_source_url = #{contentSourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="digest != null">
+        digest = #{digest,jdbcType=VARCHAR},
+      </if>
+      <if test="showcCoverPic != null">
+        showc_cover_pic = #{showcCoverPic,jdbcType=BIT},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="needOpenComment != null">
+        need_open_comment = #{needOpenComment,jdbcType=BIT},
+      </if>
+      <if test="onlyFansCanComment != null">
+        only_fans_can_comment = #{onlyFansCanComment,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where mid = #{mid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yoooho.mall.model.WechatArticleOrigin">
+    update wechat_article_origin
+    set thumb_media_id = #{thumbMediaId,jdbcType=VARCHAR},
+      thumb_url = #{thumbUrl,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      content_source_url = #{contentSourceUrl,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      digest = #{digest,jdbcType=VARCHAR},
+      showc_cover_pic = #{showcCoverPic,jdbcType=BIT},
+      url = #{url,jdbcType=VARCHAR},
+      need_open_comment = #{needOpenComment,jdbcType=BIT},
+      only_fans_can_comment = #{onlyFansCanComment,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where mid = #{mid,jdbcType=VARCHAR}
+  </update>
+</mapper>

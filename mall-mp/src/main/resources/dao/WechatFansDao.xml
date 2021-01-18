@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yoooho.mall.dao.WechatFansDao">
+  <select id="selectFans" parameterType="java.util.Map" resultType="com.yoooho.mall.model.WechatFans">
+      select openid,
+      phone ,
+      nickname,
+      sex,
+      city,
+      province,
+      headimgurl,
+      subscribe_time as subscribeTime,
+      subscribe,
+      unionid,
+      remark,
+      tagid_list as tagidList,
+      subscribe_scene as subscribeSecene,
+      qr_scene_str as qrSceneStr from wechat_fans
+      <where>
+          <if test="openid != null and openid !=''">
+              openid = #{openid}
+          </if>
+          <if test="nickname != null and nickname !=''">
+             AND nickname = #{nickname}
+          </if>
+          <if test="tagid != null and tagid !=''">
+              AND  (tagid_list like concat(concat("%, ",#{tagid}),",%") OR tagid_list like concat("%, ",concat(#{tagid},"]")) OR tagid_list like concat("[",concat(#{tagid},",%")))
+          </if>
+          <if test="city != null and city !=''">
+              AND city = #{city}
+          </if>
+      </where>
+
+  </select>
+
+</mapper>

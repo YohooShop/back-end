@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yoooho.mall.mapper.PmsStoreMapper">
+  <resultMap id="BaseResultMap" type="com.yoooho.mall.model.PmsStore">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="detailed_address" jdbcType="VARCHAR" property="detailedAddress" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="latitude" jdbcType="VARCHAR" property="latitude" />
+    <result column="longitude" jdbcType="VARCHAR" property="longitude" />
+    <result column="valid_time" jdbcType="VARCHAR" property="validTime" />
+    <result column="day_time" jdbcType="VARCHAR" property="dayTime" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="is_show" jdbcType="BIT" property="isShow" />
+    <result column="is_del" jdbcType="BIT" property="isDel" />
+    <result column="day_time_end" jdbcType="TIMESTAMP" property="dayTimeEnd" />
+    <result column="day_time_start" jdbcType="TIMESTAMP" property="dayTimeStart" />
+    <result column="valid_time_end" jdbcType="TIMESTAMP" property="validTimeEnd" />
+    <result column="valid_time_start" jdbcType="TIMESTAMP" property="validTimeStart" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, `name`, introduction, phone, address, detailed_address, image, latitude, longitude, 
+    valid_time, day_time, add_time, is_show, is_del, day_time_end, day_time_start, valid_time_end, 
+    valid_time_start
+  </sql>
+  <select id="selectByExample" parameterType="com.yoooho.mall.model.PmsStoreExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pms_store
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from pms_store
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from pms_store
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yoooho.mall.model.PmsStoreExample">
+    delete from pms_store
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yoooho.mall.model.PmsStore">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into pms_store (`name`, introduction, phone, 
+      address, detailed_address, image, 
+      latitude, longitude, valid_time, 
+      day_time, add_time, is_show, 
+      is_del, day_time_end, day_time_start, 
+      valid_time_end, valid_time_start)
+    values (#{name,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{detailedAddress,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{latitude,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, #{validTime,jdbcType=VARCHAR}, 
+      #{dayTime,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, #{isShow,jdbcType=BIT}, 
+      #{isDel,jdbcType=BIT}, #{dayTimeEnd,jdbcType=TIMESTAMP}, #{dayTimeStart,jdbcType=TIMESTAMP}, 
+      #{validTimeEnd,jdbcType=TIMESTAMP}, #{validTimeStart,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yoooho.mall.model.PmsStore">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into pms_store
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="introduction != null">
+        introduction,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="detailedAddress != null">
+        detailed_address,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="latitude != null">
+        latitude,
+      </if>
+      <if test="longitude != null">
+        longitude,
+      </if>
+      <if test="validTime != null">
+        valid_time,
+      </if>
+      <if test="dayTime != null">
+        day_time,
+      </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
+      <if test="isShow != null">
+        is_show,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+      <if test="dayTimeEnd != null">
+        day_time_end,
+      </if>
+      <if test="dayTimeStart != null">
+        day_time_start,
+      </if>
+      <if test="validTimeEnd != null">
+        valid_time_end,
+      </if>
+      <if test="validTimeStart != null">
+        valid_time_start,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="detailedAddress != null">
+        #{detailedAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="validTime != null">
+        #{validTime,jdbcType=VARCHAR},
+      </if>
+      <if test="dayTime != null">
+        #{dayTime,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isShow != null">
+        #{isShow,jdbcType=BIT},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=BIT},
+      </if>
+      <if test="dayTimeEnd != null">
+        #{dayTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dayTimeStart != null">
+        #{dayTimeStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validTimeEnd != null">
+        #{validTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validTimeStart != null">
+        #{validTimeStart,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yoooho.mall.model.PmsStoreExample" resultType="java.lang.Long">
+    select count(*) from pms_store
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pms_store
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null">
+        `name` = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.introduction != null">
+        introduction = #{record.introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailedAddress != null">
+        detailed_address = #{record.detailedAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null">
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.latitude != null">
+        latitude = #{record.latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longitude != null">
+        longitude = #{record.longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.validTime != null">
+        valid_time = #{record.validTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dayTime != null">
+        day_time = #{record.dayTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addTime != null">
+        add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isShow != null">
+        is_show = #{record.isShow,jdbcType=BIT},
+      </if>
+      <if test="record.isDel != null">
+        is_del = #{record.isDel,jdbcType=BIT},
+      </if>
+      <if test="record.dayTimeEnd != null">
+        day_time_end = #{record.dayTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dayTimeStart != null">
+        day_time_start = #{record.dayTimeStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.validTimeEnd != null">
+        valid_time_end = #{record.validTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.validTimeStart != null">
+        valid_time_start = #{record.validTimeStart,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pms_store
+    set id = #{record.id,jdbcType=BIGINT},
+      `name` = #{record.name,jdbcType=VARCHAR},
+      introduction = #{record.introduction,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      detailed_address = #{record.detailedAddress,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      latitude = #{record.latitude,jdbcType=VARCHAR},
+      longitude = #{record.longitude,jdbcType=VARCHAR},
+      valid_time = #{record.validTime,jdbcType=VARCHAR},
+      day_time = #{record.dayTime,jdbcType=VARCHAR},
+      add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      is_show = #{record.isShow,jdbcType=BIT},
+      is_del = #{record.isDel,jdbcType=BIT},
+      day_time_end = #{record.dayTimeEnd,jdbcType=TIMESTAMP},
+      day_time_start = #{record.dayTimeStart,jdbcType=TIMESTAMP},
+      valid_time_end = #{record.validTimeEnd,jdbcType=TIMESTAMP},
+      valid_time_start = #{record.validTimeStart,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yoooho.mall.model.PmsStore">
+    update pms_store
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="detailedAddress != null">
+        detailed_address = #{detailedAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="validTime != null">
+        valid_time = #{validTime,jdbcType=VARCHAR},
+      </if>
+      <if test="dayTime != null">
+        day_time = #{dayTime,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isShow != null">
+        is_show = #{isShow,jdbcType=BIT},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=BIT},
+      </if>
+      <if test="dayTimeEnd != null">
+        day_time_end = #{dayTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dayTimeStart != null">
+        day_time_start = #{dayTimeStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validTimeEnd != null">
+        valid_time_end = #{validTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validTimeStart != null">
+        valid_time_start = #{validTimeStart,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yoooho.mall.model.PmsStore">
+    update pms_store
+    set `name` = #{name,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      detailed_address = #{detailedAddress,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=VARCHAR},
+      valid_time = #{validTime,jdbcType=VARCHAR},
+      day_time = #{dayTime,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      is_show = #{isShow,jdbcType=BIT},
+      is_del = #{isDel,jdbcType=BIT},
+      day_time_end = #{dayTimeEnd,jdbcType=TIMESTAMP},
+      day_time_start = #{dayTimeStart,jdbcType=TIMESTAMP},
+      valid_time_end = #{validTimeEnd,jdbcType=TIMESTAMP},
+      valid_time_start = #{validTimeStart,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yoooho.mall.dao.PortalPinkProductDao">
+    <resultMap id="pinkResultMap" type="com.yoooho.mall.domain.OmsPinkDetail"
+               extends="com.yoooho.mall.mapper.OmsPinkMapper.BaseResultMap" autoMapping="true">
+        <association property="pinkBuyer" columnPrefix="opb_" resultMap="com.yoooho.mall.mapper.OmsPinkBuyerMapper.BaseResultMap" autoMapping="true">
+        </association>
+    </resultMap>
+    <select id="selectPinkingDetailByPinkId" resultMap="pinkResultMap">
+        SELECT op.id id,
+        op.cid cid,
+        op.pid pid,
+        op.people people,
+        op.price price,
+        op.add_time add_time,
+        op.stop_time stop_time,
+        op.k_id k_id,
+        op.status status,
+        opb.id opb_id,
+        opb.buyer_id opb_buyer_id,
+        opb.pink_id opb_pink_id,
+        opb.order_id opb_order_id,
+        opb.pink_num opb_pink_num,
+        opb.pink_amt opb_pink_amt,
+        opb.pink_status opb_pink_status,
+        opb.pink_time opb_pink_time,
+        opb.is_refund opb_is_refund,
+        opb.is_tpl opb_is_tpl,
+        opb.buyer_icon opb_buyer_icon,
+        opb.pay_status opb_pay_status,
+        opb.buyer_name opb_buyer_name
+        FROM
+        oms_pink op
+        LEFT JOIN oms_pink_buyer opb ON opb.pink_id =  op.id
+        WHERE  op.status = 1
+        AND op.k_id = opb.buyer_id
+        AND op.cid = #{id}
+    </select>
+
+
+</mapper>

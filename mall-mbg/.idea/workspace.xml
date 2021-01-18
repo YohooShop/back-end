@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="99d9b8df-9317-4a1a-8383-e991d86e1607" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/controller/LogisticController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/logistic/entity/LogisticJsonBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/logistic/entity/ShipperCompany.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/logistic/entity/Trace.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/logistic/entity/UnityLogistic.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/logistic/enumerate/State.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/logistic/enumerate/Status.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/logistic/enumerate/TracesOrder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/logistic/kdniao/KdniaoManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/logistic/kdniao/KdniaoTrackQueryAPI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/logistic/kdniao/entity/KdniaoROrderData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/logistic/kdniao/entity/KdniaoRdata.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/logistic/kdniao/entity/KdniaoRdataTrace.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/logistic/kdniao/entity/RequestData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/logistic/kdniao/shipper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/logistic/manager/Logistic.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/logistic/manager/LogisticManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/logistic/manager/Order.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/logistic/manager/abs/AbstarctLogisticManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/logistic/manager/exception/LogisticException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/logistic/test/AppTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/logistic/utils/LogisticUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/logistic/utils/PropertiesUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/logistic/utils/StandarShipperCompany.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/service/LogisticService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/service/impl/LogisticServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/util/KdniaoSubscribeAPI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/resources/kuaidi.default.api.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mall-portal/src/main/resources/kuaidi.standar.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/generator.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/generator.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/controller/UmsMemberReceiveAddressController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/controller/UmsMemberReceiveAddressController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/service/impl/UmsMemberReceiveAddressServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../mall-portal/src/main/java/com/macro/mall/portal/service/impl/UmsMemberReceiveAddressServiceImpl.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1VEgTEoIWrq98taXo6PATLFlgCj" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1574666310898" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Problems" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Generator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.macro.mall.Generator" />
+      <module name="mall-mbg" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.macro.mall.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Generator" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="99d9b8df-9317-4a1a-8383-e991d86e1607" name="Default Changelist" comment="" />
+      <created>1574666019117</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1574666019117</updated>
+      <workItem from="1574666020395" duration="319000" />
+      <workItem from="1575022014908" duration="27000" />
+      <workItem from="1576823674707" duration="21000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1358" height="335" key="GridCell.Tab.0.bottom" timestamp="1576823695394">
+      <screen x="0" y="23" width="2048" height="1053" />
+    </state>
+    <state width="1358" height="335" key="GridCell.Tab.0.bottom/0.23.2048.1053@0.23.2048.1053" timestamp="1576823695394" />
+    <state width="1358" height="335" key="GridCell.Tab.0.center" timestamp="1576823695394">
+      <screen x="0" y="23" width="2048" height="1053" />
+    </state>
+    <state width="1358" height="335" key="GridCell.Tab.0.center/0.23.2048.1053@0.23.2048.1053" timestamp="1576823695394" />
+    <state width="1358" height="335" key="GridCell.Tab.0.left" timestamp="1576823695394">
+      <screen x="0" y="23" width="2048" height="1053" />
+    </state>
+    <state width="1358" height="335" key="GridCell.Tab.0.left/0.23.2048.1053@0.23.2048.1053" timestamp="1576823695394" />
+    <state width="1358" height="335" key="GridCell.Tab.0.right" timestamp="1576823695394">
+      <screen x="0" y="23" width="2048" height="1053" />
+    </state>
+    <state width="1358" height="335" key="GridCell.Tab.0.right/0.23.2048.1053@0.23.2048.1053" timestamp="1576823695394" />
+    <state width="1358" height="335" key="GridCell.Tab.1.bottom" timestamp="1576823695395">
+      <screen x="0" y="23" width="2048" height="1053" />
+    </state>
+    <state width="1358" height="335" key="GridCell.Tab.1.bottom/0.23.2048.1053@0.23.2048.1053" timestamp="1576823695395" />
+    <state width="1358" height="335" key="GridCell.Tab.1.center" timestamp="1576823695395">
+      <screen x="0" y="23" width="2048" height="1053" />
+    </state>
+    <state width="1358" height="335" key="GridCell.Tab.1.center/0.23.2048.1053@0.23.2048.1053" timestamp="1576823695395" />
+    <state width="1358" height="335" key="GridCell.Tab.1.left" timestamp="1576823695395">
+      <screen x="0" y="23" width="2048" height="1053" />
+    </state>
+    <state width="1358" height="335" key="GridCell.Tab.1.left/0.23.2048.1053@0.23.2048.1053" timestamp="1576823695395" />
+    <state width="1358" height="335" key="GridCell.Tab.1.right" timestamp="1576823695395">
+      <screen x="0" y="23" width="2048" height="1053" />
+    </state>
+    <state width="1358" height="335" key="GridCell.Tab.1.right/0.23.2048.1053@0.23.2048.1053" timestamp="1576823695395" />
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

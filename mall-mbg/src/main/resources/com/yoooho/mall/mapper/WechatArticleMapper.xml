@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yoooho.mall.mapper.WechatArticleMapper">
+  <resultMap id="BaseResultMap" type="com.yoooho.mall.model.WechatArticle">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="cid" jdbcType="VARCHAR" property="cid" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="image_input" jdbcType="VARCHAR" property="imageInput" />
+    <result column="synopsis" jdbcType="VARCHAR" property="synopsis" />
+    <result column="share_title" jdbcType="VARCHAR" property="shareTitle" />
+    <result column="share_synopsis" jdbcType="VARCHAR" property="shareSynopsis" />
+    <result column="visit" jdbcType="VARCHAR" property="visit" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="add_time" jdbcType="VARCHAR" property="addTime" />
+    <result column="hide" jdbcType="VARCHAR" property="hide" />
+    <result column="admin_id" jdbcType="INTEGER" property="adminId" />
+    <result column="mer_id" jdbcType="INTEGER" property="merId" />
+    <result column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="is_hot" jdbcType="TINYINT" property="isHot" />
+    <result column="is_banner" jdbcType="TINYINT" property="isBanner" />
+    <result column="media_id" jdbcType="VARCHAR" property="mediaId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yoooho.mall.model.WechatArticle">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, cid, title, author, image_input, synopsis, share_title, share_synopsis, visit, 
+    sort, url, `status`, add_time, hide, admin_id, mer_id, product_id, is_hot, is_banner, 
+    media_id
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.yoooho.mall.model.WechatArticleExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from wechat_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.yoooho.mall.model.WechatArticleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wechat_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from wechat_article
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from wechat_article
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yoooho.mall.model.WechatArticleExample">
+    delete from wechat_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yoooho.mall.model.WechatArticle">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into wechat_article (cid, title, author, 
+      image_input, synopsis, share_title, 
+      share_synopsis, visit, sort, 
+      url, `status`, add_time, 
+      hide, admin_id, mer_id, 
+      product_id, is_hot, is_banner, 
+      media_id, content)
+    values (#{cid,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{imageInput,jdbcType=VARCHAR}, #{synopsis,jdbcType=VARCHAR}, #{shareTitle,jdbcType=VARCHAR}, 
+      #{shareSynopsis,jdbcType=VARCHAR}, #{visit,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+      #{url,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{addTime,jdbcType=VARCHAR}, 
+      #{hide,jdbcType=VARCHAR}, #{adminId,jdbcType=INTEGER}, #{merId,jdbcType=INTEGER}, 
+      #{productId,jdbcType=INTEGER}, #{isHot,jdbcType=TINYINT}, #{isBanner,jdbcType=TINYINT}, 
+      #{mediaId,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yoooho.mall.model.WechatArticle">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into wechat_article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="imageInput != null">
+        image_input,
+      </if>
+      <if test="synopsis != null">
+        synopsis,
+      </if>
+      <if test="shareTitle != null">
+        share_title,
+      </if>
+      <if test="shareSynopsis != null">
+        share_synopsis,
+      </if>
+      <if test="visit != null">
+        visit,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
+      <if test="hide != null">
+        hide,
+      </if>
+      <if test="adminId != null">
+        admin_id,
+      </if>
+      <if test="merId != null">
+        mer_id,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="isHot != null">
+        is_hot,
+      </if>
+      <if test="isBanner != null">
+        is_banner,
+      </if>
+      <if test="mediaId != null">
+        media_id,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cid != null">
+        #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="imageInput != null">
+        #{imageInput,jdbcType=VARCHAR},
+      </if>
+      <if test="synopsis != null">
+        #{synopsis,jdbcType=VARCHAR},
+      </if>
+      <if test="shareTitle != null">
+        #{shareTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="shareSynopsis != null">
+        #{shareSynopsis,jdbcType=VARCHAR},
+      </if>
+      <if test="visit != null">
+        #{visit,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=VARCHAR},
+      </if>
+      <if test="hide != null">
+        #{hide,jdbcType=VARCHAR},
+      </if>
+      <if test="adminId != null">
+        #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="merId != null">
+        #{merId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="isHot != null">
+        #{isHot,jdbcType=TINYINT},
+      </if>
+      <if test="isBanner != null">
+        #{isBanner,jdbcType=TINYINT},
+      </if>
+      <if test="mediaId != null">
+        #{mediaId,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yoooho.mall.model.WechatArticleExample" resultType="java.lang.Long">
+    select count(*) from wechat_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update wechat_article
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.cid != null">
+        cid = #{record.cid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.author != null">
+        author = #{record.author,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imageInput != null">
+        image_input = #{record.imageInput,jdbcType=VARCHAR},
+      </if>
+      <if test="record.synopsis != null">
+        synopsis = #{record.synopsis,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shareTitle != null">
+        share_title = #{record.shareTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shareSynopsis != null">
+        share_synopsis = #{record.shareSynopsis,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visit != null">
+        visit = #{record.visit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null">
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.url != null">
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.addTime != null">
+        add_time = #{record.addTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hide != null">
+        hide = #{record.hide,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminId != null">
+        admin_id = #{record.adminId,jdbcType=INTEGER},
+      </if>
+      <if test="record.merId != null">
+        mer_id = #{record.merId,jdbcType=INTEGER},
+      </if>
+      <if test="record.productId != null">
+        product_id = #{record.productId,jdbcType=INTEGER},
+      </if>
+      <if test="record.isHot != null">
+        is_hot = #{record.isHot,jdbcType=TINYINT},
+      </if>
+      <if test="record.isBanner != null">
+        is_banner = #{record.isBanner,jdbcType=TINYINT},
+      </if>
+      <if test="record.mediaId != null">
+        media_id = #{record.mediaId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update wechat_article
+    set id = #{record.id,jdbcType=INTEGER},
+      cid = #{record.cid,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      author = #{record.author,jdbcType=VARCHAR},
+      image_input = #{record.imageInput,jdbcType=VARCHAR},
+      synopsis = #{record.synopsis,jdbcType=VARCHAR},
+      share_title = #{record.shareTitle,jdbcType=VARCHAR},
+      share_synopsis = #{record.shareSynopsis,jdbcType=VARCHAR},
+      visit = #{record.visit,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      url = #{record.url,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=TINYINT},
+      add_time = #{record.addTime,jdbcType=VARCHAR},
+      hide = #{record.hide,jdbcType=VARCHAR},
+      admin_id = #{record.adminId,jdbcType=INTEGER},
+      mer_id = #{record.merId,jdbcType=INTEGER},
+      product_id = #{record.productId,jdbcType=INTEGER},
+      is_hot = #{record.isHot,jdbcType=TINYINT},
+      is_banner = #{record.isBanner,jdbcType=TINYINT},
+      media_id = #{record.mediaId,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update wechat_article
+    set id = #{record.id,jdbcType=INTEGER},
+      cid = #{record.cid,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      author = #{record.author,jdbcType=VARCHAR},
+      image_input = #{record.imageInput,jdbcType=VARCHAR},
+      synopsis = #{record.synopsis,jdbcType=VARCHAR},
+      share_title = #{record.shareTitle,jdbcType=VARCHAR},
+      share_synopsis = #{record.shareSynopsis,jdbcType=VARCHAR},
+      visit = #{record.visit,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      url = #{record.url,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=TINYINT},
+      add_time = #{record.addTime,jdbcType=VARCHAR},
+      hide = #{record.hide,jdbcType=VARCHAR},
+      admin_id = #{record.adminId,jdbcType=INTEGER},
+      mer_id = #{record.merId,jdbcType=INTEGER},
+      product_id = #{record.productId,jdbcType=INTEGER},
+      is_hot = #{record.isHot,jdbcType=TINYINT},
+      is_banner = #{record.isBanner,jdbcType=TINYINT},
+      media_id = #{record.mediaId,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yoooho.mall.model.WechatArticle">
+    update wechat_article
+    <set>
+      <if test="cid != null">
+        cid = #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="imageInput != null">
+        image_input = #{imageInput,jdbcType=VARCHAR},
+      </if>
+      <if test="synopsis != null">
+        synopsis = #{synopsis,jdbcType=VARCHAR},
+      </if>
+      <if test="shareTitle != null">
+        share_title = #{shareTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="shareSynopsis != null">
+        share_synopsis = #{shareSynopsis,jdbcType=VARCHAR},
+      </if>
+      <if test="visit != null">
+        visit = #{visit,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=VARCHAR},
+      </if>
+      <if test="hide != null">
+        hide = #{hide,jdbcType=VARCHAR},
+      </if>
+      <if test="adminId != null">
+        admin_id = #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="merId != null">
+        mer_id = #{merId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="isHot != null">
+        is_hot = #{isHot,jdbcType=TINYINT},
+      </if>
+      <if test="isBanner != null">
+        is_banner = #{isBanner,jdbcType=TINYINT},
+      </if>
+      <if test="mediaId != null">
+        media_id = #{mediaId,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yoooho.mall.model.WechatArticle">
+    update wechat_article
+    set cid = #{cid,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      image_input = #{imageInput,jdbcType=VARCHAR},
+      synopsis = #{synopsis,jdbcType=VARCHAR},
+      share_title = #{shareTitle,jdbcType=VARCHAR},
+      share_synopsis = #{shareSynopsis,jdbcType=VARCHAR},
+      visit = #{visit,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=TINYINT},
+      add_time = #{addTime,jdbcType=VARCHAR},
+      hide = #{hide,jdbcType=VARCHAR},
+      admin_id = #{adminId,jdbcType=INTEGER},
+      mer_id = #{merId,jdbcType=INTEGER},
+      product_id = #{productId,jdbcType=INTEGER},
+      is_hot = #{isHot,jdbcType=TINYINT},
+      is_banner = #{isBanner,jdbcType=TINYINT},
+      media_id = #{mediaId,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yoooho.mall.model.WechatArticle">
+    update wechat_article
+    set cid = #{cid,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      image_input = #{imageInput,jdbcType=VARCHAR},
+      synopsis = #{synopsis,jdbcType=VARCHAR},
+      share_title = #{shareTitle,jdbcType=VARCHAR},
+      share_synopsis = #{shareSynopsis,jdbcType=VARCHAR},
+      visit = #{visit,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=TINYINT},
+      add_time = #{addTime,jdbcType=VARCHAR},
+      hide = #{hide,jdbcType=VARCHAR},
+      admin_id = #{adminId,jdbcType=INTEGER},
+      mer_id = #{merId,jdbcType=INTEGER},
+      product_id = #{productId,jdbcType=INTEGER},
+      is_hot = #{isHot,jdbcType=TINYINT},
+      is_banner = #{isBanner,jdbcType=TINYINT},
+      media_id = #{mediaId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

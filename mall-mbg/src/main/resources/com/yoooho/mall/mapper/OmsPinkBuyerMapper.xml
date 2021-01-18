@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yoooho.mall.mapper.OmsPinkBuyerMapper">
+  <resultMap id="BaseResultMap" type="com.yoooho.mall.model.OmsPinkBuyer">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="buyer_id" jdbcType="BIGINT" property="buyerId" />
+    <result column="pink_id" jdbcType="BIGINT" property="pinkId" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="pink_num" jdbcType="INTEGER" property="pinkNum" />
+    <result column="pink_price" jdbcType="DECIMAL" property="pinkPrice" />
+    <result column="pink_amt" jdbcType="DECIMAL" property="pinkAmt" />
+    <result column="pink_status" jdbcType="BIT" property="pinkStatus" />
+    <result column="pink_time" jdbcType="BIGINT" property="pinkTime" />
+    <result column="is_refund" jdbcType="BIT" property="isRefund" />
+    <result column="is_tpl" jdbcType="BIT" property="isTpl" />
+    <result column="buyer_name" jdbcType="VARCHAR" property="buyerName" />
+    <result column="buyer_icon" jdbcType="VARCHAR" property="buyerIcon" />
+    <result column="pay_status" jdbcType="INTEGER" property="payStatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, buyer_id, pink_id, order_id, pink_num, pink_price, pink_amt, pink_status, pink_time, 
+    is_refund, is_tpl, buyer_name, buyer_icon, pay_status
+  </sql>
+  <select id="selectByExample" parameterType="com.yoooho.mall.model.OmsPinkBuyerExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from oms_pink_buyer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from oms_pink_buyer
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from oms_pink_buyer
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yoooho.mall.model.OmsPinkBuyerExample">
+    delete from oms_pink_buyer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yoooho.mall.model.OmsPinkBuyer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into oms_pink_buyer (buyer_id, pink_id, order_id, 
+      pink_num, pink_price, pink_amt, 
+      pink_status, pink_time, is_refund, 
+      is_tpl, buyer_name, buyer_icon, 
+      pay_status)
+    values (#{buyerId,jdbcType=BIGINT}, #{pinkId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, 
+      #{pinkNum,jdbcType=INTEGER}, #{pinkPrice,jdbcType=DECIMAL}, #{pinkAmt,jdbcType=DECIMAL}, 
+      #{pinkStatus,jdbcType=BIT}, #{pinkTime,jdbcType=BIGINT}, #{isRefund,jdbcType=BIT}, 
+      #{isTpl,jdbcType=BIT}, #{buyerName,jdbcType=VARCHAR}, #{buyerIcon,jdbcType=VARCHAR}, 
+      #{payStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yoooho.mall.model.OmsPinkBuyer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into oms_pink_buyer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="buyerId != null">
+        buyer_id,
+      </if>
+      <if test="pinkId != null">
+        pink_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="pinkNum != null">
+        pink_num,
+      </if>
+      <if test="pinkPrice != null">
+        pink_price,
+      </if>
+      <if test="pinkAmt != null">
+        pink_amt,
+      </if>
+      <if test="pinkStatus != null">
+        pink_status,
+      </if>
+      <if test="pinkTime != null">
+        pink_time,
+      </if>
+      <if test="isRefund != null">
+        is_refund,
+      </if>
+      <if test="isTpl != null">
+        is_tpl,
+      </if>
+      <if test="buyerName != null">
+        buyer_name,
+      </if>
+      <if test="buyerIcon != null">
+        buyer_icon,
+      </if>
+      <if test="payStatus != null">
+        pay_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="buyerId != null">
+        #{buyerId,jdbcType=BIGINT},
+      </if>
+      <if test="pinkId != null">
+        #{pinkId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="pinkNum != null">
+        #{pinkNum,jdbcType=INTEGER},
+      </if>
+      <if test="pinkPrice != null">
+        #{pinkPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="pinkAmt != null">
+        #{pinkAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="pinkStatus != null">
+        #{pinkStatus,jdbcType=BIT},
+      </if>
+      <if test="pinkTime != null">
+        #{pinkTime,jdbcType=BIGINT},
+      </if>
+      <if test="isRefund != null">
+        #{isRefund,jdbcType=BIT},
+      </if>
+      <if test="isTpl != null">
+        #{isTpl,jdbcType=BIT},
+      </if>
+      <if test="buyerName != null">
+        #{buyerName,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerIcon != null">
+        #{buyerIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="payStatus != null">
+        #{payStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yoooho.mall.model.OmsPinkBuyerExample" resultType="java.lang.Long">
+    select count(*) from oms_pink_buyer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update oms_pink_buyer
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.buyerId != null">
+        buyer_id = #{record.buyerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.pinkId != null">
+        pink_id = #{record.pinkId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderId != null">
+        order_id = #{record.orderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.pinkNum != null">
+        pink_num = #{record.pinkNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.pinkPrice != null">
+        pink_price = #{record.pinkPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.pinkAmt != null">
+        pink_amt = #{record.pinkAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.pinkStatus != null">
+        pink_status = #{record.pinkStatus,jdbcType=BIT},
+      </if>
+      <if test="record.pinkTime != null">
+        pink_time = #{record.pinkTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.isRefund != null">
+        is_refund = #{record.isRefund,jdbcType=BIT},
+      </if>
+      <if test="record.isTpl != null">
+        is_tpl = #{record.isTpl,jdbcType=BIT},
+      </if>
+      <if test="record.buyerName != null">
+        buyer_name = #{record.buyerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buyerIcon != null">
+        buyer_icon = #{record.buyerIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payStatus != null">
+        pay_status = #{record.payStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update oms_pink_buyer
+    set id = #{record.id,jdbcType=BIGINT},
+      buyer_id = #{record.buyerId,jdbcType=BIGINT},
+      pink_id = #{record.pinkId,jdbcType=BIGINT},
+      order_id = #{record.orderId,jdbcType=BIGINT},
+      pink_num = #{record.pinkNum,jdbcType=INTEGER},
+      pink_price = #{record.pinkPrice,jdbcType=DECIMAL},
+      pink_amt = #{record.pinkAmt,jdbcType=DECIMAL},
+      pink_status = #{record.pinkStatus,jdbcType=BIT},
+      pink_time = #{record.pinkTime,jdbcType=BIGINT},
+      is_refund = #{record.isRefund,jdbcType=BIT},
+      is_tpl = #{record.isTpl,jdbcType=BIT},
+      buyer_name = #{record.buyerName,jdbcType=VARCHAR},
+      buyer_icon = #{record.buyerIcon,jdbcType=VARCHAR},
+      pay_status = #{record.payStatus,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yoooho.mall.model.OmsPinkBuyer">
+    update oms_pink_buyer
+    <set>
+      <if test="buyerId != null">
+        buyer_id = #{buyerId,jdbcType=BIGINT},
+      </if>
+      <if test="pinkId != null">
+        pink_id = #{pinkId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="pinkNum != null">
+        pink_num = #{pinkNum,jdbcType=INTEGER},
+      </if>
+      <if test="pinkPrice != null">
+        pink_price = #{pinkPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="pinkAmt != null">
+        pink_amt = #{pinkAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="pinkStatus != null">
+        pink_status = #{pinkStatus,jdbcType=BIT},
+      </if>
+      <if test="pinkTime != null">
+        pink_time = #{pinkTime,jdbcType=BIGINT},
+      </if>
+      <if test="isRefund != null">
+        is_refund = #{isRefund,jdbcType=BIT},
+      </if>
+      <if test="isTpl != null">
+        is_tpl = #{isTpl,jdbcType=BIT},
+      </if>
+      <if test="buyerName != null">
+        buyer_name = #{buyerName,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerIcon != null">
+        buyer_icon = #{buyerIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="payStatus != null">
+        pay_status = #{payStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yoooho.mall.model.OmsPinkBuyer">
+    update oms_pink_buyer
+    set buyer_id = #{buyerId,jdbcType=BIGINT},
+      pink_id = #{pinkId,jdbcType=BIGINT},
+      order_id = #{orderId,jdbcType=BIGINT},
+      pink_num = #{pinkNum,jdbcType=INTEGER},
+      pink_price = #{pinkPrice,jdbcType=DECIMAL},
+      pink_amt = #{pinkAmt,jdbcType=DECIMAL},
+      pink_status = #{pinkStatus,jdbcType=BIT},
+      pink_time = #{pinkTime,jdbcType=BIGINT},
+      is_refund = #{isRefund,jdbcType=BIT},
+      is_tpl = #{isTpl,jdbcType=BIT},
+      buyer_name = #{buyerName,jdbcType=VARCHAR},
+      buyer_icon = #{buyerIcon,jdbcType=VARCHAR},
+      pay_status = #{payStatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

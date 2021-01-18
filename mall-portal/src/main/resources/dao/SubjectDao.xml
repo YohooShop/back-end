@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yoooho.mall.dao.SubjectDao">
+    <select id="selectSubjectProduct" resultType="com.yoooho.mall.model.PmsProduct">
+        SELECT pms_product.* FROM cms_subject_product_relation
+        LEFT JOIN pms_product ON cms_subject_product_relation.product_id = pms_product.id
+        WHERE cms_subject_product_relation.subject_id = #{subject_id}
+        AND pms_product.publish_status = 1
+        LIMIT #{offSet},#{size}
+    </select>
+</mapper>

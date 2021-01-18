@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OmsRefundDao">
+    <resultMap id="refundDetailResultMap" type="com.yoooho.mall.dto.OmsRefundResult" extends="com.yoooho.mall.mapper.OmsOrderRefundMapper.BaseResultMap">
+        <collection property="products" javaType="java.util.ArrayList" resultMap="com.yoooho.mall.mapper.OmsOrderItemMapper.BaseResultMap" columnPrefix="ooi_">
+
+        </collection>
+    </resultMap>
+    <select id="getList" resultMap="refundDetailResultMap" >
+        select oor.id,
+        oor.status,
+        oor.return_amount,
+        oor.create_time,
+        ooi.product_price ooi_product_price,
+        ooi.product_pic ooi_product_pic,
+        ooi.product_name ooi_product_name,
+        ooi.product_quantity ooi_product_quantity,
+        ooi.product_attr  ooi_product_attr
+        from
+        oms_order_refund oor
+        left join  oms_order_item ooi
+        ON oor.order_id = ooi.order_id
+        where oor.member_id = #{member_id}
+        order by  oor.create_time desc
+    </select>
+
+    <select id="getDetail" parameterType="java.lang.Long" resultMap="refundDetailResultMap">
+        select oor.*,
+        ooi.product_id ooi_product_id,
+        ooi.product_pic ooi_product_pic,
+        ooi.product_name ooi_product_name,
+        ooi.product_sn ooi_product_sn,
+        ooi.product_quantity ooi_product_quantity,
+        ooi.coupon_amount ooi_coupon_amount,
+        ooi.integration_amount ooi_integration_amount,
+        ooi.real_amount ooi_real_amount,
+        ooi.promotion_amount ooi_promotion_amount,
+        ooi.promotion_name ooi_promotion_name,
+        ooi.product_attr  ooi_product_attr
+        from
+        oms_order_refund oor
+        left join  oms_order_item ooi
+        ON oor.order_id = ooi.order_id
+        where oor.id = #{id}
+    </select>
+</mapper>
