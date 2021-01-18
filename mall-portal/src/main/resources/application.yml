@@ -60,17 +60,17 @@ jwt:
   refreshHeader: Refresh-Token
 
 wechat:
-  appid: wx37c3dc173d27fc87
-  secret: 07f0c566d8a83b49911cd48e15fa84f6
+  appid:
+  secret:
   mp:
-    appId: wxabc33ea337b835e8
-    secret: 80ca2253469b3aed8a0ff6e4e1092311
-    token: woshiyigetokenaaa123qqq
-    aesKey: 4e0xO10MMtdLf35r8p4Zt1LLpRbHKZABSlvj2CFii1Y
+    appId:
+    secret:
+    token:
+    aesKey:
 
 aliyun:
-  accessKeyId: LTAIYWAcGjOQY7dy
-  accessSecret: cpe2caOFvlpaA5ZUQRoUnp1XOh8Gua
+  accessKeyId:
+  accessSecret:
 
 
 #邮箱验证码有效时间/分钟

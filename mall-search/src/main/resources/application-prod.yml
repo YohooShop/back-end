@@ -21,7 +21,7 @@ spring:
       cluster-name: my-application
   elasticsearch:
     rest:
-      uris: ["http://39.100.220.199:9200"]
+      uris: [""]
 
 logging:
   path: /var/logs #配置日志生成路径
